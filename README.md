@@ -11,7 +11,7 @@ This project requires:
   
 Install node dependencies using ```npm install```  
   
-You also need to create a .env file with the following properties: 
+You also need to create a .env file with the following variables: 
 * HOST: the database host  
 * USER: the database user  
 * DATABASE: the database name  
