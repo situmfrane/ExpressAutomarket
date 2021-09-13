@@ -1,6 +1,5 @@
 const express = require('express');
 const route = express.Router();
-const bcrypt = require('bcrypt');
 const authenticateJWT = require('../authenticateJWT');
 const flash = require('connect-flash');
 const ls = require('local-storage')
@@ -12,8 +11,8 @@ app.use(flash());
 const Post = require('../models/post')
 const { Op } = require('sequelize');
 
+//Gets all posts based on user that is logged in, allows the user to edit/delete said posts
 route.get('/api/account', authenticateJWT, (req, res) => {
-    
     Post.findAll({
         raw: true,
         where: {

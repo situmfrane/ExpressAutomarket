@@ -8,9 +8,10 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//Gets car based on id, renders the car page
 route.get('/api/car/:id', (req, res) => {
 
-
+    //Find cars with id from uri parameters
     Post.findAll({
         raw: true,
         order: [
@@ -20,6 +21,8 @@ route.get('/api/car/:id', (req, res) => {
             id: req.params.id
         }
     }).then((post) => {
+        
+        //Finds the user using the user owner Id so it can show the listing owner's phone number
         User.findAll({
             raw: true,
             where: {

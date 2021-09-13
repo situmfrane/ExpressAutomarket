@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/database');
 const Post = require('../models/post')
 
+//Model for user table
 const User = sequelize.define('users', {
     id: {
         type: Sequelize.INTEGER,

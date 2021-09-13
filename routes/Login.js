@@ -27,38 +27,43 @@ route.get('/api/login', (req, res) => {
 //Login route
 route.post('/api/login', (req, res) => {
 
+    //Checks if user with corresponding name exists
     User.findAll({
         where: {
             username: req.body.username
         }
     })
         .then((user) => {
+
             function generateAccessToken() {
                 return jwt.sign({ id: user[0].id }, process.env.SECRET_TOKEN, { expiresIn: '10h' });
             }
 
+            //Compares input password with bcrypt hashed password in database
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 
+                //If password is correct it sets the access token to localstorage and redirects page
                 if (result) {
                     //generates access token and signs it for 60 mins
                     const accessToken = generateAccessToken();
                     ls.set('accessToken', accessToken);
                     res.redirect('/api/posts');
 
-                }
+                }   //Flashes messsage in case password is incorrect
                 else {
                     req.flash('message', 'Wrong password.')
                     res.redirect('/api/login');
                 }
             })
         })
-        .catch(() => {
+        .catch(() => { //Redirects back to login and flashes message in case the username is wrong
             req.flash('message', 'Wrong username.')
             res.redirect('/api/login');
         })
 
 });
 
+//Deletes access token from localstorage upon logout
 route.get('/api/logout', (req, res) => {
     ls.clear();
     res.redirect('/api/posts');

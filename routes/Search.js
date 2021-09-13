@@ -13,6 +13,7 @@ app.use(flash());
 const Post = require('../models/post')
 const { Op } = require('sequelize');
 
+//Get all posts
 route.get('/api/posts', (req, res) => {
 
     Post.findAll({
@@ -27,6 +28,7 @@ route.get('/api/posts', (req, res) => {
     
 });
 
+//Get posts using the side filter
 route.post('/api/filtered', (req,res) => {
     
     Post.findAll({

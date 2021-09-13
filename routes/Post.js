@@ -1,12 +1,10 @@
 const express = require('express');
 const route = express.Router();
-const bcrypt = require('bcrypt');
 const authenticateJWT = require('../authenticateJWT');
 const flash = require('connect-flash');
 const ls = require('local-storage');
 
 const cars = require('../config/cars');
-var fs = require("fs");
 
 const User = require('../models/user')
 const Post = require('../models/post')
@@ -17,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(flash());
 
-
+//Formats the js date so it woudl be good for sql database
 format = function date2str(x, y) {
     var z = {
         M: x.getMonth() + 1,
@@ -35,17 +33,24 @@ format = function date2str(x, y) {
     });
 }
 
+//Renders make post page, cars property is for usage in later updates
 route.get('/api/makepost', authenticateJWT, (req, res) => {
     
     res.render('post.ejs', {ls: ls, cars: cars});
 });
 
+//Create post
 route.post('/api/makepost', authenticateJWT, (req, res) => {
     
+    //Postedat is today's date
     var postedat = format(new Date(), 'yyyy-MM-dd');
+    
+    //Expiresat is listing expiry date
+    var expiresat = format(new Date(now.getFullYear(), now.getMonth()+1, 1), 'yyyy-MM-dd');
+
     Post.create({
         postedat: postedat, 
-        expiresat: '2020-11-08',
+        expiresat: expiresat,
         userId: req.user.id, 
         type: req.body.type,
         vinnumber: req.body.vinnumber, 
@@ -75,7 +80,7 @@ route.post('/api/makepost', authenticateJWT, (req, res) => {
     })
 });
 
-
+//Edits post
 route.get('/api/editpost/:id', authenticateJWT, (req, res) => {
 
     Post.findAll({
@@ -89,10 +94,11 @@ route.get('/api/editpost/:id', authenticateJWT, (req, res) => {
     })
 });
 
+//Saves editpost changes
 route.post('/api/editpost/:id', authenticateJWT, async (req, res) => {
 
     var postedat = format(new Date(), 'yyyy-MM-dd');
-    var expiresat = format(new Date(), 'yyyy-MM-dd');
+    var expiresat = format(new Date(now.getFullYear(), now.getMonth()+1, 1), 'yyyy-MM-dd');
 
         await Post.update({
             postedat: postedat, 
@@ -126,6 +132,7 @@ route.post('/api/editpost/:id', authenticateJWT, async (req, res) => {
 
 });
 
+//Delete post
 route.get('/api/deletepost/:id', authenticateJWT, async (req, res) => {
 
     await Post.destroy({
