@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Express Automarket - login</title>
+</head>
+<body>
+    <div class="grid min-h-screen place-items-center">
+        <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+            <h1 class="text-xl font-semibold">Log in - Express Automarket</h1>
+            <form class="mt-6" action="/api/login" method="POST">
+                <label for="username" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Username</label>
+                <input id="" type="text" name="username" placeholder="Unesite korisničko ime" autocomplete="email"
+                    class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+                    required />
+                <label for="" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Passsword</label>
+                <input id="" type="password" name="password" placeholder="Unesite šifru" autocomplete=""
+                    class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+                    required />
+                <% if(message.length> 0){ %>
+                <div class="border border-red-600 bg-red-400 text-red-900 rounded-md p-2 mt-2 mb-2">
+                        <%= message %>
+                </div>
+                <% } %>    
+                <button type="submit"
+                    class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-blue-500 shadow-lg focus:outline-none hover:bg-blue-600 hover:shadow-none">
+                    Log in
+                </button>
+        </div>
+
+        </form>
+    </div>
+    </div>
+</body>
+
+<%- include('footer.ejs') %>

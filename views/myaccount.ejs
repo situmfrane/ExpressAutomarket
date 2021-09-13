@@ -1,0 +1,46 @@
+<%- include('header.ejs') %>
+
+
+    <% if(cars.length!=0){ cars.forEach((cars)=>{
+        if(user = cars.userId){
+            %>
+        %>
+        <div class="w-screen  flex justify-center items-center">
+            <div class="container mx-auto max-w-xl w-full p-4 sm:w-1/2">
+                <div class="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl">
+                    <div class="prod-title">
+                        <p class="text-2xl uppercase text-gray-900 font-bold"><%=cars.title %></p>
+                        <p class="uppercase text-sm text-gray-400">
+                            Mileage: <%=cars.mileage %>
+                        </p>
+                        <p class="uppercase text-sm text-gray-400">
+                            Year of production: <%=cars.manufacturedyear %>
+                        </p>
+                    </div>
+                    <div class="prod-img my-2">
+                        <img src="<%=cars.imageuri %>"
+                            class="w-full object-cover object-center" />
+                    </div>
+                   
+                        <div class="flex flex-col md:flex-row justify-between items-center text-gray-900">
+                            <p class="font-bold text-xl"><%=cars.price%> HRK ~ <%=cars.price*0.13%> €</p>
+                            <a  href="/api/editpost/<%=cars.id%>"
+                                class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">Edit
+                        </a>
+
+                            <a href="/api/deletepost/<%=cars.id%>"
+                            class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">Delete
+                    </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% }})} %>
+
+
+
+
+            <%- include('footer.ejs') %>
