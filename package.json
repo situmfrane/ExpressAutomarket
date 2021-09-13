@@ -1,5 +1,5 @@
 {
-  "name": "epic-automarket",
+  "name": "express-automarket",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Syntaxis-org/epic-automarket.git"
+    "url": "git+https://github.com/situmfrane/ExpressAutomarket.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Syntaxis-org/epic-automarket/issues"
+    "url": "https://github.com/situmfrane/ExpressAutomarket.git/issues"
   },
-  "homepage": "https://github.com/Syntaxis-org/epic-automarket#readme",
+  "homepage": "https://github.com/situmfrane/ExpressAutomarket.git#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
