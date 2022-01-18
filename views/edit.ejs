@@ -16,8 +16,7 @@
                 <textarea id="description" type="text" name="description" placeholder="Unesite opis"
                     autocomplete="family-name"
                     class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-                    value="<%=cars[0].description %>"
-                    required></textarea>
+                    required><%=cars[0].description %></textarea>
                 <label for="manufacturer" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Brand</label>
                 <input id="manufacturer" type="manufacturer" name="manufacturer"
                     class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
@@ -165,7 +164,15 @@
                         <select
                             class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                             required id="year" name="garaged">
-                            <option selected="<%=cars[0].garaged%>"><%=cars[0].garaged%></option>
+                           <% var garaged;
+                            if(cars[0].garaged==0) 
+                            {
+                                garaged = 'No'
+                            } else {
+                                garaged = 'Yes'
+                            }
+                            %>
+                            <option selected="<%=cars[0].garaged%>" value="<%=cars[0].garaged%>"><%=garaged%></option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -175,7 +182,15 @@
                         <select
                             class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                             required id="year" name="crashed">
-                            <option selected="<%=cars[0].crashed%>"><%=cars[0].crashed%></option>
+                           <% var crashed;
+                            if(cars[0].crashed==0) 
+                            {
+                                crashed = 'No'
+                            } else {
+                                crashed = 'Yes'
+                            }
+                            %>
+                            <option selected="<%=cars[0].crashed=0%>" value="<%=cars[0].crashed=0%>"><%=crashed%></option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -199,7 +214,16 @@
                     <select
                         class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                         required  name="servicehistory">
-                        <option selected="<%=cars[0].servicehistory%>"><%=cars[0].servicehistory%></option>
+                        <%
+                        var serviceHistory;
+                        if(cars[0].servicehistory==0) 
+                        {
+                            serviceHistory = 'No'
+                        } else {
+                            serviceHistory = 'Yes'
+                        }
+                        %>
+                        <option selected="<%=cars[0].servicehistory%>" value="<%=cars[0].servicehistory%>"><%=serviceHistory%></option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>

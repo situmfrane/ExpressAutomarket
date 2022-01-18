@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USER, process.env.DB_PASS, {
+const sequelize = new Sequelize(process.env.DATABASE, 'root', process.env.DB_PASS, {
   dialect: 'mysql',
   host: process.env.HOST
 })

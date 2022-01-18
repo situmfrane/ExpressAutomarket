@@ -31,6 +31,40 @@ route.get('/api/posts', (req, res) => {
 //Get posts using the side filter
 route.post('/api/filtered', (req,res) => {
     
+    let priceFrom, priceTo, yearFrom, yearTo, engineFrom, engineTo, powerFrom, powerTo, mileageFrom, mileageTo;
+
+    if(req.body.priceFrom == '') {
+        priceFrom = 1;
+    }
+    if(req.body.priceTo == '') {
+        priceTo = 9999999999;
+    }
+    if(req.body.yearFrom == '') {
+        yearFrom = 1;
+    }
+    if(req.body.yearTo == '') {
+        yearTo = 99999;
+    }
+    if(req.body.engineFrom == '') {
+        engineFrom = 1;
+    }
+    if(req.body.engineTo == '') {
+        engineTo = 99999;
+    }
+    if(req.body.powerFrom == '') {
+        powerFrom = 1;
+    }
+    if(req.body.powerTo == '') {
+        powerTo = 999999999;
+    }
+    if(req.body.mileageFrom == '') {
+        mileageFrom = 1;
+    }
+    if(req.body.mileageTo == '') {
+        mileageTo = 999999999;
+    }
+
+
     Post.findAll({
         raw: true,
         order: [
@@ -38,37 +72,40 @@ route.post('/api/filtered', (req,res) => {
         ],
         where:  {
             manufacturer: {
-                [Op.like]: req.body.manufacturer
+                [Op.substring]: req.body.manufacturer
             },
-            model: {
-                [Op.like]: req.body.model
-            },
+            model:
+            {
+                [Op.substring]: req.body.model
+            }
+            ,
             price: {
-                [Op.between]: [req.body.priceFrom, req.body.priceTo]
+                [Op.between]: [priceFrom, priceTo]
             },
             manufacturedYear: {
-                [Op.between]: [req.body.yearFrom, req.body.yearTo]
+                [Op.between]: [yearFrom, yearTo]
             },
             mileage: {
-                [Op.between]: [req.body.mileageFrom, req.body.mileageTo]
+                [Op.between]: [mileageFrom, mileageTo]
             },
             enginesize: {
-                [Op.between]: [req.body.engineFrom, req.body.engineTo]
+                [Op.between]: [engineFrom, engineTo]
             },
             enginepower: {
-                [Op.between]: [req.body.powerFrom, req.body.powerTo]
-            },
+                [Op.between]: [powerFrom, powerTo]
+            }
+            ,
             fuel: {
-                [Op.like]: req.body.fuel
+                [Op.substring]: req.body.fuel
             },
             servicehistory: {
-                [Op.like]: req.body.service
+                [Op.substring]: req.body.service
             },
             garaged: {
-                [Op.like]: req.body.garaged
+                [Op.substring]: req.body.garaged
             }, 
             crashed: {
-                [Op.like]: req.body.crashed
+                [Op.substring]: req.body.crashed
             }
         }
     }).then((post) => {

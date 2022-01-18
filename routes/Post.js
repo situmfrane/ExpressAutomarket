@@ -44,7 +44,7 @@ route.post('/api/makepost', authenticateJWT, (req, res) => {
     
     //Postedat is today's date
     var postedat = format(new Date(), 'yyyy-MM-dd');
-    
+    var now = new Date();
     //Expiresat is listing expiry date
     var expiresat = format(new Date(now.getFullYear(), now.getMonth()+1, 1), 'yyyy-MM-dd');
 
@@ -98,6 +98,7 @@ route.get('/api/editpost/:id', authenticateJWT, (req, res) => {
 route.post('/api/editpost/:id', authenticateJWT, async (req, res) => {
 
     var postedat = format(new Date(), 'yyyy-MM-dd');
+    var now = new Date();
     var expiresat = format(new Date(now.getFullYear(), now.getMonth()+1, 1), 'yyyy-MM-dd');
 
         await Post.update({
